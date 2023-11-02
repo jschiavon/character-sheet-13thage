@@ -41,7 +41,7 @@ class AbilitiesCtrl extends GetxController {
       intelligence: abilitiesModel.value.intelligence,
       wisdom: abilitiesModel.value.wisdom,
       charisma: abilitiesModel.value.charisma,
-      racialMod: value.isEmpty ? abilitiesNames.indexOf(value) : -1,
+      racialMod: value.isNotEmpty ? abilitiesNames.indexOf(value) : -1,
       classMod: abilitiesModel.value.classMod,
     );
   }
@@ -56,7 +56,7 @@ class AbilitiesCtrl extends GetxController {
       wisdom: abilitiesModel.value.wisdom,
       charisma: abilitiesModel.value.charisma,
       racialMod: abilitiesModel.value.racialMod,
-      classMod: value.isEmpty ? abilitiesNames.indexOf(value) : -1,
+      classMod: value.isNotEmpty ? abilitiesNames.indexOf(value) : -1,
     );
   }
 
