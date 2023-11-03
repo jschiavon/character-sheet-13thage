@@ -19,6 +19,7 @@ import 'package:get/get.dart';
 import '../model/abilities.dart';
 import '../model/aspects.dart';
 import '../model/character.dart';
+import '../model/status.dart';
 import '../utilities/database.dart';
 import 'abilities.dart';
 import 'aspects.dart';
@@ -70,6 +71,13 @@ class MainCtrl extends GetxController {
       );
     }
 
+    final statusId = await _db.value.getStatusId();
+    if (statusId != null) {
+      status.statusModel.value = await _db.value.getStatus(statusId);
+    } else {
+      status.statusModel.value = Status();
+    }
+
     super.onInit();
   }
 
@@ -97,6 +105,15 @@ class MainCtrl extends GetxController {
       await _db.value.insertAspects(aspects.aspectsModel.value);
     } else {
       await _db.value.updateAspects(aspects.aspectsModel.value);
+    }
+  }
+
+  void saveStatus() async {
+    final statusId = await _db.value.getStatusId();
+    if (statusId == null) {
+      await _db.value.insertStatus(status.statusModel.value);
+    } else {
+      await _db.value.updateStatus(status.statusModel.value);
     }
   }
 }

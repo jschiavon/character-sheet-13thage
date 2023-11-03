@@ -20,6 +20,7 @@ import 'package:path/path.dart';
 import '../model/abilities.dart';
 import '../model/aspects.dart';
 import '../model/character.dart';
+import '../model/status.dart';
 
 class DataBaseHelper {
   static const _databaseName = 'character_database.db';
@@ -28,6 +29,7 @@ class DataBaseHelper {
   static const _abilitiesTable = 'abilities';
   static const _characterTable = 'character';
   static const _aspectsTable = 'aspects';
+  static const _statusTable = 'status';
 
   static const _id = 'id';
   static const _strength = 'strength';
@@ -49,6 +51,11 @@ class DataBaseHelper {
   static const _uniqueThing = 'uniqueThing';
   static const _bond = 'bond';
   static const _weakness = 'weakness';
+
+  static const _damage = 'damage';
+  static const _recoveriesSpent = 'recoveriesSpent';
+  static const _staggered = 'staggered';
+  static const _down = 'down';
 
   late Database _db;
 
@@ -96,6 +103,15 @@ class DataBaseHelper {
             $_classMod INTEGER NOT NULL
           )
           ''');
+    await db.execute('''
+          CREATE TABLE $_statusTable (
+            $_id INTEGER PRIMARY KEY,
+            $_damage INTEGER NOT NULL,
+            $_recoveriesSpent INTEGER NOT NULL,
+            $_staggered INTEGER NOT NULL,
+            $_down INTEGER NOT NULL
+          )
+          ''');
   }
 
   Future<Abilities> insertAbilities(Abilities abilities) async {
@@ -111,6 +127,11 @@ class DataBaseHelper {
   Future<Aspects> insertAspects(Aspects aspects) async {
     aspects.id = await _db.insert(_aspectsTable, aspects.toMap());
     return aspects;
+  }
+
+  Future<Status> insertStatus(Status status) async {
+    status.id = await _db.insert(_statusTable, status.toMap());
+    return status;
   }
 
   Future<int?> getAbilitiesId() async {
@@ -132,6 +153,14 @@ class DataBaseHelper {
   Future<int?> getCharacterId() async {
     List<Map<String, dynamic>> maps = await _db.query(
       _characterTable,
+      columns: [_id],
+    );
+    return maps.firstOrNull?[_id];
+  }
+
+  Future<int?> getStatusId() async {
+    List<Map<String, dynamic>> maps = await _db.query(
+      _statusTable,
       columns: [_id],
     );
     return maps.firstOrNull?[_id];
@@ -184,6 +213,20 @@ class DataBaseHelper {
     return Aspects.fromMap(maps.firstOrNull);
   }
 
+  Future<Status> getStatus(int id) async {
+    List<Map<String, dynamic>> maps = await _db.query(_statusTable,
+        columns: [
+          _id,
+          _damage,
+          _recoveriesSpent,
+          _staggered,
+          _down,
+        ],
+        where: '$_id = ?',
+        whereArgs: [id]);
+    return Status.fromMap(maps.firstOrNull);
+  }
+
   Future<int> deleteAbilities(int id) async {
     return await _db.delete(
       _abilitiesTable,
@@ -203,6 +246,14 @@ class DataBaseHelper {
   Future<int> deleteAspects(int id) async {
     return await _db.delete(
       _aspectsTable,
+      where: '$_id = ?',
+      whereArgs: [id],
+    );
+  }
+
+  Future<int> deleteStatus(int id) async {
+    return await _db.delete(
+      _statusTable,
       where: '$_id = ?',
       whereArgs: [id],
     );
@@ -232,6 +283,15 @@ class DataBaseHelper {
       aspects.toMap(),
       where: '$_id = ?',
       whereArgs: [aspects.id],
+    );
+  }
+
+  Future<int> updateStatus(Status status) async {
+    return await _db.update(
+      _statusTable,
+      status.toMap(),
+      where: '$_id = ?',
+      whereArgs: [status.id],
     );
   }
 }

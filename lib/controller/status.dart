@@ -24,7 +24,6 @@ class StatusCtrl extends GetxController {
   int get damage => statusModel.value.damage;
   int get recoveries => statusModel.value.recoveriesSpent;
   bool get staggered => statusModel.value.staggered;
-  bool get dead => statusModel.value.dead;
   bool get down => statusModel.value.down;
 
   set damage(int value) => statusModel.value = Status(
@@ -33,7 +32,6 @@ class StatusCtrl extends GetxController {
         recoveriesSpent: statusModel.value.recoveriesSpent,
         staggered: statusModel.value.staggered,
         down: statusModel.value.down,
-        dead: statusModel.value.dead,
       );
   set recoveries(int value) => statusModel.value = Status(
         id: statusModel.value.id,
@@ -41,7 +39,6 @@ class StatusCtrl extends GetxController {
         recoveriesSpent: value,
         staggered: statusModel.value.staggered,
         down: statusModel.value.down,
-        dead: statusModel.value.dead,
       );
 
   void toggleStaggered() => statusModel.value = Status(
@@ -50,23 +47,14 @@ class StatusCtrl extends GetxController {
         recoveriesSpent: statusModel.value.recoveriesSpent,
         staggered: !statusModel.value.staggered,
         down: statusModel.value.down,
-        dead: statusModel.value.dead,
       );
-  void toggleDead() => statusModel.value = Status(
-        id: statusModel.value.id,
-        damage: statusModel.value.damage,
-        recoveriesSpent: statusModel.value.recoveriesSpent,
-        staggered: statusModel.value.staggered,
-        down: statusModel.value.down,
-        dead: !statusModel.value.dead,
-      );
+
   void toggleDown() => statusModel.value = Status(
         id: statusModel.value.id,
         damage: statusModel.value.damage,
         recoveriesSpent: statusModel.value.recoveriesSpent,
         staggered: statusModel.value.staggered,
         down: !statusModel.value.down,
-        dead: statusModel.value.dead,
       );
 
   void longRest() {

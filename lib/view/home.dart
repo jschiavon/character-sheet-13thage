@@ -326,7 +326,10 @@ class Home extends GetView<MainCtrl> {
           ),
           children: [
             TextButton(
-              onPressed: controller.status.longRest,
+              onPressed: () {
+                controller.status.longRest();
+                controller.saveStatus();
+              },
               child: const Text("Long rest"),
             ),
             Obx(
@@ -936,6 +939,7 @@ class Home extends GetView<MainCtrl> {
   String computeHP() {
     int hp = (classDict!['hp'] + controller.abilities.constitution.modifier) *
         controller.character.hitPointMultiplier;
+
     if (controller.status.damage >= hp ~/ 2) {
       if (!controller.status.staggered) {
         controller.status.toggleStaggered();
@@ -952,6 +956,8 @@ class Home extends GetView<MainCtrl> {
         controller.status.toggleDown();
       }
     }
+
+    controller.saveStatus();
 
     return '${hp - controller.status.damage} / $hp';
   }
@@ -1006,6 +1012,7 @@ class Home extends GetView<MainCtrl> {
         TextButton(
             onPressed: () {
               controller.status.damage += damage.value;
+              controller.saveStatus();
               Get.back();
             },
             child: const Text('Confirm'))
