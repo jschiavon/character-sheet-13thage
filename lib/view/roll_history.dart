@@ -31,7 +31,7 @@ class RollHistoryView extends GetView<MainCtrl> {
       body: Align(
         alignment: Alignment.topCenter,
         child: SizedBox(
-          width: Dimensions.adaptedWidth,
+          width: Dimensions.adaptedWidth(context),
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 24, horizontal: 6),
             child: ListView.builder(

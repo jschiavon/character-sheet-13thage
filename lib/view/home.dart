@@ -21,6 +21,7 @@ import 'package:get/get.dart';
 
 import '../controller/main_controller.dart';
 import '../model/abilities.dart';
+import '../model/attack.dart';
 import '../model/roll.dart';
 import '../utilities/lists.dart';
 import '../utilities/utilities.dart';
@@ -43,9 +44,11 @@ class Home extends GetView<MainCtrl> {
         ),
         actions: [
           IconButton(
-            onPressed: () => Get.isDarkMode
-                ? Get.changeThemeMode(ThemeMode.light)
-                : Get.changeThemeMode(ThemeMode.dark),
+            onPressed: () {
+              Get.isDarkMode
+                  ? Get.changeThemeMode(ThemeMode.light)
+                  : Get.changeThemeMode(ThemeMode.dark);
+            },
             icon: Get.isDarkMode
                 ? const Icon(Icons.light_mode_outlined)
                 : const Icon(Icons.dark_mode_outlined),
@@ -55,31 +58,32 @@ class Home extends GetView<MainCtrl> {
       ),
       body: Align(
         alignment: Alignment.topCenter,
-        child: body(),
+        child: body(context),
       ),
     );
   }
 
-  Widget body() {
+  Widget body(BuildContext context) {
     return SizedBox(
-      width: Dimensions.adaptedWidth,
+      width: Dimensions.adaptedWidth(context),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           shrinkWrap: true,
           children: [
-            characterDataSection(),
-            aspectsSection(),
-            abilitiesSection(),
-            statsSection(),
-            rollsSection(),
+            characterDataSection(context),
+            aspectsSection(context),
+            abilitiesSection(context),
+            statsSection(context),
+            attacksSection(context),
+            rollsSection(context),
           ],
         ),
       ),
     );
   }
 
-  Widget characterDataSection() {
+  Widget characterDataSection(BuildContext context) {
     return Card(
       elevation: 0,
       color: Get.theme.colorScheme.primaryContainer,
@@ -165,7 +169,7 @@ class Home extends GetView<MainCtrl> {
     );
   }
 
-  Widget aspectsSection() {
+  Widget aspectsSection(BuildContext context) {
     return Card(
       elevation: 0,
       color: Get.theme.colorScheme.primaryContainer,
@@ -263,7 +267,7 @@ class Home extends GetView<MainCtrl> {
     );
   }
 
-  Widget abilitiesSection() {
+  Widget abilitiesSection(BuildContext context) {
     var abilitiesList = <Widget>[
       TextButton(
         onPressed: () => Get.toNamed('/pointBuy'),
@@ -309,7 +313,7 @@ class Home extends GetView<MainCtrl> {
     );
   }
 
-  Widget statsSection() {
+  Widget statsSection(BuildContext context) {
     return Card(
       elevation: 0,
       color: Get.theme.colorScheme.primaryContainer,
@@ -396,7 +400,7 @@ class Home extends GetView<MainCtrl> {
                   ),
                   leading: const Icon(Icons.shield_outlined),
                   onTap: () => controller.rolls.roll(
-                    ability: 'Armor Class',
+                    stat: 'Armor Class',
                     bonus: computeStat('ac'),
                     level: controller.character.level,
                   ),
@@ -478,7 +482,139 @@ class Home extends GetView<MainCtrl> {
     );
   }
 
-  Widget rollsSection() {
+  Widget attacksSection(BuildContext context) {
+    return Card(
+      elevation: 0,
+      color: Get.theme.colorScheme.primaryContainer,
+      child: Padding(
+        padding: const EdgeInsets.all(4),
+        child: ExpansionTile(
+          title: Text(
+            'Basic attacks',
+            style: Get.textTheme.titleLarge,
+          ),
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: Dimensions.adaptedWidth(context) / 3 - 16,
+                  child: Card(
+                    elevation: 3,
+                    color: Get.theme.colorScheme.background,
+                    surfaceTintColor: Get.theme.colorScheme.background,
+                    child: Obx(
+                      () => ListTile(
+                        title: Text(
+                          computeAttack('melee').attackBonus.toSignedString(),
+                          style: Get.textTheme.headlineLarge,
+                        ),
+                        subtitle: Text(
+                          Dimensions.isSmallScreen ? 'Melee' : 'Melee attack',
+                          style: Get.textTheme.labelMedium,
+                        ),
+                        leading: const Icon(Icons.group_outlined),
+                        onTap: () => controller.rolls.roll(
+                          stat: 'Melee attack',
+                          bonus: computeAttack('melee').modifier,
+                          level: controller.character.level,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: Dimensions.adaptedWidth(context) / 3 * 2 - 16,
+                  child: Card(
+                    elevation: 3,
+                    color: Get.theme.colorScheme.background,
+                    surfaceTintColor: Get.theme.colorScheme.background,
+                    child: Obx(
+                      () => ListTile(
+                        title: Text(
+                          computeAttack('melee').printDamage(),
+                          style: Get.textTheme.headlineLarge,
+                        ),
+                        subtitle: Text(
+                          'Melee damage',
+                          style: Get.textTheme.labelMedium,
+                        ),
+                        leading: const Icon(Icons.group_outlined),
+                        trailing: Text(
+                          computeAttack('melee').averageDamage.toString(),
+                          style: Get.textTheme.headlineLarge,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: Dimensions.adaptedWidth(Get.context!) / 3 - 16,
+                  child: Card(
+                    elevation: 3,
+                    color: Get.theme.colorScheme.background,
+                    surfaceTintColor: Get.theme.colorScheme.background,
+                    child: Obx(
+                      () => ListTile(
+                        title: Text(
+                          computeAttack('ranged').attackBonus.toSignedString(),
+                          style: Get.textTheme.headlineLarge,
+                        ),
+                        subtitle: Text(
+                          Dimensions.isSmallScreen ? 'Ranged' : 'Ranged attack',
+                          style: Get.textTheme.labelMedium,
+                        ),
+                        leading:
+                            const Icon(Icons.connect_without_contact_outlined),
+                        onTap: () => controller.rolls.roll(
+                          stat: 'Ranged attack',
+                          bonus: computeAttack('ranged').modifier,
+                          level: controller.character.level,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: Dimensions.adaptedWidth(Get.context!) / 3 * 2 - 16,
+                  child: Card(
+                    elevation: 3,
+                    color: Get.theme.colorScheme.background,
+                    surfaceTintColor: Get.theme.colorScheme.background,
+                    child: Obx(
+                      () => ListTile(
+                        title: Text(
+                          computeAttack('ranged').printDamage(),
+                          style: Get.textTheme.headlineLarge,
+                        ),
+                        subtitle: Text(
+                          'Ranged damage',
+                          style: Get.textTheme.labelMedium,
+                        ),
+                        leading:
+                            const Icon(Icons.connect_without_contact_outlined),
+                        trailing: Text(
+                          computeAttack('ranged').averageDamage.toString(),
+                          style: Get.textTheme.headlineLarge,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget rollsSection(BuildContext context) {
     return Obx(
       () => Card(
         elevation: 0,
@@ -634,7 +770,7 @@ class Home extends GetView<MainCtrl> {
             level: controller.character.level,
             proficency: true,
           ),
-          icon: Icon(Icons.check_box_outlined),
+          icon: const Icon(Icons.check_box_outlined),
         ),
       ),
     );
@@ -739,6 +875,35 @@ class Home extends GetView<MainCtrl> {
     return statistic;
   }
 
+  Attack computeAttack(String kind) {
+    int abilityModifier = 0;
+
+    List<String> ability = classDict[kind]['ability'];
+    if (ability.length == 1) {
+      abilityModifier =
+          controller.abilities.abilityValue(ability.first).modifier;
+    } else {
+      abilityModifier = ability
+          .map((e) => controller.abilities.abilityValue(e).modifier)
+          .reduce(
+        (value, element) {
+          if (element > value) {
+            value = element;
+          }
+          return value;
+        },
+      );
+    }
+
+    return Attack(
+      dice: classDict[kind]['die'],
+      modifier: abilityModifier,
+      level: controller.character.level,
+      multiplier: controller.character.abilityMultiplier,
+      miss: classDict[kind]['miss'] != null ? controller.character.level : null,
+    );
+  }
+
   String computeHP() {
     int hp = (classDict!['hp'] + controller.abilities.constitution.modifier) *
         controller.character.hitPointMultiplier;
@@ -814,7 +979,7 @@ class Home extends GetView<MainCtrl> {
               controller.status.damage += damage.value;
               Get.back();
             },
-            child: Text('Confirm'))
+            child: const Text('Confirm'))
       ],
     );
   }

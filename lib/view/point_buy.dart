@@ -44,15 +44,15 @@ class PointBuyView extends GetView<MainCtrl> {
         title: const Text("Point Buy"),
         backgroundColor: Get.theme.colorScheme.primaryContainer,
       ),
-      body: body(),
+      body: body(context),
     );
   }
 
-  Widget body() {
+  Widget body(BuildContext context) {
     return Align(
       alignment: Alignment.topCenter,
       child: SizedBox(
-        width: Dimensions.adaptedWidth,
+        width: Dimensions.adaptedWidth(context),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

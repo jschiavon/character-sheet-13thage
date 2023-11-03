@@ -42,15 +42,15 @@ class RollAbilitiesView extends GetView<MainCtrl> {
         title: const Text("Roll abilities"),
         backgroundColor: Get.theme.colorScheme.primaryContainer,
       ),
-      body: body(),
+      body: body(context),
     );
   }
 
-  Widget body() {
+  Widget body(BuildContext context) {
     return Align(
       alignment: Alignment.topCenter,
       child: SizedBox(
-        width: Dimensions.adaptedWidth,
+        width: Dimensions.adaptedWidth(context),
         child: Column(
           children: [
             Padding(

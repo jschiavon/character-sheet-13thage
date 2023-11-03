@@ -35,11 +35,11 @@ class Dimensions {
     return 300;
   }
 
-  static double get adaptedWidth {
-    if (MediaQuery.of(Get.context!).size.width < 640) {
-      return MediaQuery.of(Get.context!).size.width;
-    } else if (MediaQuery.of(Get.context!).size.width < 1008) {
-      return max(640, MediaQuery.of(Get.context!).size.width * 5 / 6);
+  static double adaptedWidth(BuildContext context) {
+    if (MediaQuery.of(context).size.width < 640) {
+      return MediaQuery.of(context).size.width;
+    } else if (MediaQuery.of(context).size.width < 1008) {
+      return max(640, MediaQuery.of(context).size.width * 5 / 6);
     }
     return 720;
   }

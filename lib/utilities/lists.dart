@@ -29,6 +29,16 @@ final CLASSES = <String, Map<String, dynamic>>{
     'hp': 7,
     'recoveries': 8,
     'recovery dice': 10,
+    'melee': {
+      'ability': ['strength'],
+      'die': 10,
+      'miss': 'level',
+    },
+    'ranged': {
+      'ability': ['dexterity'],
+      'die': 8,
+      'miss': null,
+    },
   },
   'Bard': {
     'abilities': [
@@ -44,6 +54,16 @@ final CLASSES = <String, Map<String, dynamic>>{
     'hp': 7,
     'recoveries': 8,
     'recovery dice': 8,
+    'melee': {
+      'ability': ['strength', 'dexterity'],
+      'die': 8,
+      'miss': 'level',
+    },
+    'ranged': {
+      'ability': ['dexterity'],
+      'die': 8,
+      'miss': null,
+    },
   },
   'Berserker: Storm Bull': {
     'abilities': [
@@ -59,6 +79,16 @@ final CLASSES = <String, Map<String, dynamic>>{
     'hp': 8,
     'recoveries': 8,
     'recovery dice': 10,
+    'melee': {
+      'ability': ['strength'],
+      'die': 10,
+      'miss': 'level',
+    },
+    'ranged': {
+      'ability': ['dexterity'],
+      'die': 8,
+      'miss': null,
+    },
   },
   'Berserker: Zoran Zorani': {
     'abilities': [
@@ -74,6 +104,16 @@ final CLASSES = <String, Map<String, dynamic>>{
     'hp': 7,
     'recoveries': 8,
     'recovery dice': 8,
+    'melee': {
+      'ability': ['strength'],
+      'die': 10,
+      'miss': 'level',
+    },
+    'ranged': {
+      'ability': ['dexterity'],
+      'die': 4,
+      'miss': null,
+    },
   },
   'Chaos Mage': {
     'abilities': [
@@ -89,6 +129,16 @@ final CLASSES = <String, Map<String, dynamic>>{
     'hp': 6,
     'recoveries': 8,
     'recovery dice': 6,
+    'melee': {
+      'ability': ['strength'],
+      'die': 6,
+      'miss': 'level',
+    },
+    'ranged': {
+      'ability': ['dexterity'],
+      'die': 4,
+      'miss': null,
+    },
   },
   'Cleric': {
     'abilities': [
@@ -97,13 +147,23 @@ final CLASSES = <String, Map<String, dynamic>>{
       '',
     ],
     'stats': {
-      'ac': 14,
+      'ac': 15,
       'pd': 11,
       'md': 11,
     },
     'hp': 7,
     'recoveries': 8,
     'recovery dice': 8,
+    'melee': {
+      'ability': ['strength'],
+      'die': 6,
+      'miss': 'level',
+    },
+    'ranged': {
+      'ability': ['dexterity'],
+      'die': 6,
+      'miss': null,
+    },
   },
   'Commander': {
     'abilities': [
@@ -119,6 +179,16 @@ final CLASSES = <String, Map<String, dynamic>>{
     'hp': 7,
     'recoveries': 8,
     'recovery dice': 8,
+    'melee': {
+      'ability': ['strength'],
+      'die': 8,
+      'miss': 'level',
+    },
+    'ranged': {
+      'ability': ['dexterity'],
+      'die': 6,
+      'miss': null,
+    },
   },
   'Demonologist': {
     'abilities': [
@@ -134,6 +204,16 @@ final CLASSES = <String, Map<String, dynamic>>{
     'hp': 6,
     'recoveries': 8,
     'recovery dice': 6,
+    'melee': {
+      'ability': ['strength'],
+      'die': 6,
+      'miss': 'level',
+    },
+    'ranged': {
+      'ability': ['dexterity'],
+      'die': 4,
+      'miss': null,
+    },
   },
   'Druid': {
     'abilities': [
@@ -150,6 +230,16 @@ final CLASSES = <String, Map<String, dynamic>>{
     'hp': 6,
     'recoveries': 8,
     'recovery dice': 6,
+    'melee': {
+      'ability': ['strength', 'dexterity'],
+      'die': 6,
+      'miss': 'level',
+    },
+    'ranged': {
+      'ability': ['dexterity'],
+      'die': 6,
+      'miss': null,
+    },
   },
   'Earth Priestess': {
     'abilities': [
@@ -165,6 +255,16 @@ final CLASSES = <String, Map<String, dynamic>>{
     'hp': 6,
     'recoveries': 8,
     'recovery dice': 6,
+    'melee': {
+      'ability': ['strength'],
+      'die': 4,
+      'miss': 'level',
+    },
+    'ranged': {
+      'ability': ['dexterity'],
+      'die': 3,
+      'miss': null,
+    },
   },
   'Fighter': {
     'abilities': [
@@ -181,6 +281,16 @@ final CLASSES = <String, Map<String, dynamic>>{
     'hp': 8,
     'recoveries': 9,
     'recovery dice': 10,
+    'melee': {
+      'ability': ['strength'],
+      'die': 10,
+      'miss': 'level',
+    },
+    'ranged': {
+      'ability': ['dexterity'],
+      'die': 8,
+      'miss': null,
+    },
   },
   'Hell Mother': {
     'abilities': [
@@ -196,6 +306,16 @@ final CLASSES = <String, Map<String, dynamic>>{
     'hp': 5,
     'recoveries': 8,
     'recovery dice': 6,
+    'melee': {
+      'ability': ['strength'],
+      'die': 4,
+      'miss': 'level',
+    },
+    'ranged': {
+      'ability': ['dexterity'],
+      'die': 3,
+      'miss': null,
+    },
   },
   'Humakti': {
     'abilities': [
@@ -211,6 +331,16 @@ final CLASSES = <String, Map<String, dynamic>>{
     'hp': 8,
     'recoveries': 8,
     'recovery dice': 8,
+    'melee': {
+      'ability': ['strength'],
+      'die': 10,
+      'miss': 'level',
+    },
+    'ranged': {
+      'ability': ['dexterity'],
+      'die': 8,
+      'miss': null,
+    },
   },
   'Monk': {
     'abilities': [
@@ -227,6 +357,16 @@ final CLASSES = <String, Map<String, dynamic>>{
     'hp': 7,
     'recoveries': 8,
     'recovery dice': 8,
+    'melee': {
+      'ability': ['strength'],
+      'die': 8,
+      'miss': 'level',
+    },
+    'ranged': {
+      'ability': ['dexterity'],
+      'die': 6,
+      'miss': null,
+    },
   },
   'Necromancer': {
     'abilities': [
@@ -242,6 +382,16 @@ final CLASSES = <String, Map<String, dynamic>>{
     'hp': 7,
     'recoveries': 8,
     'recovery dice': 6,
+    'melee': {
+      'ability': ['strength'],
+      'die': 6,
+      'miss': 'level',
+    },
+    'ranged': {
+      'ability': ['dexterity'],
+      'die': 4,
+      'miss': null,
+    },
   },
   'Occultist': {
     'abilities': [
@@ -257,6 +407,16 @@ final CLASSES = <String, Map<String, dynamic>>{
     'hp': 7,
     'recoveries': 8,
     'recovery dice': 6,
+    'melee': {
+      'ability': ['strength'],
+      'die': 6,
+      'miss': 'level',
+    },
+    'ranged': {
+      'ability': ['dexterity'],
+      'die': 4,
+      'miss': null,
+    },
   },
   'Paladin': {
     'abilities': [
@@ -272,6 +432,16 @@ final CLASSES = <String, Map<String, dynamic>>{
     'hp': 7,
     'recoveries': 8,
     'recovery dice': 10,
+    'melee': {
+      'ability': ['strength'],
+      'die': 10,
+      'miss': 'level',
+    },
+    'ranged': {
+      'ability': ['dexterity'],
+      'die': 8,
+      'miss': null,
+    },
   },
   'Ranger': {
     'abilities': [
@@ -287,6 +457,16 @@ final CLASSES = <String, Map<String, dynamic>>{
     'hp': 7,
     'recoveries': 8,
     'recovery dice': 8,
+    'melee': {
+      'ability': ['strength'],
+      'die': 10,
+      'miss': 'level',
+    },
+    'ranged': {
+      'ability': ['dexterity'],
+      'die': 8,
+      'miss': 'level',
+    },
   },
   'Rogue': {
     'abilities': [
@@ -302,6 +482,16 @@ final CLASSES = <String, Map<String, dynamic>>{
     'hp': 7,
     'recoveries': 8,
     'recovery dice': 8,
+    'melee': {
+      'ability': ['dexterity'],
+      'die': 8,
+      'miss': 'level',
+    },
+    'ranged': {
+      'ability': ['dexterity'],
+      'die': 6,
+      'miss': 'level',
+    },
   },
   'Sorcerer': {
     'abilities': [
@@ -317,6 +507,16 @@ final CLASSES = <String, Map<String, dynamic>>{
     'hp': 7,
     'recoveries': 8,
     'recovery dice': 6,
+    'melee': {
+      'ability': ['strength'],
+      'die': 8,
+      'miss': 'level',
+    },
+    'ranged': {
+      'ability': ['dexterity'],
+      'die': 6,
+      'miss': null,
+    },
   },
   'Trickster': {
     'abilities': [
@@ -332,6 +532,16 @@ final CLASSES = <String, Map<String, dynamic>>{
     'hp': 6,
     'recoveries': 8,
     'recovery dice': 10,
+    'melee': {
+      'ability': ['strength'],
+      'die': 6,
+      'miss': 'level',
+    },
+    'ranged': {
+      'ability': ['dexterity'],
+      'die': 4,
+      'miss': null,
+    },
   },
   'Wizard': {
     'abilities': [
@@ -347,6 +557,16 @@ final CLASSES = <String, Map<String, dynamic>>{
     'hp': 7,
     'recoveries': 8,
     'recovery dice': 6,
+    'melee': {
+      'ability': ['strength'],
+      'die': 6,
+      'miss': 'level',
+    },
+    'ranged': {
+      'ability': ['dexterity'],
+      'die': 4,
+      'miss': null,
+    },
   },
 };
 
