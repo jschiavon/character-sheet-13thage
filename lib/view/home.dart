@@ -516,7 +516,9 @@ class Home extends GetView<MainCtrl> {
                           Dimensions.isSmallScreen ? 'Melee' : 'Melee attack',
                           style: Get.textTheme.labelMedium,
                         ),
-                        leading: const Icon(Icons.group_outlined),
+                        leading: Dimensions.isSmallScreen
+                            ? null
+                            : const Icon(Icons.group_outlined),
                         onTap: () => controller.rolls.roll(
                           stat: 'Melee attack',
                           bonus: computeAttack('melee').modifier,
@@ -542,7 +544,9 @@ class Home extends GetView<MainCtrl> {
                           'Melee damage',
                           style: Get.textTheme.labelMedium,
                         ),
-                        leading: const Icon(Icons.group_outlined),
+                        leading: Dimensions.isSmallScreen
+                            ? null
+                            : const Icon(Icons.group_outlined),
                         trailing: Text(
                           computeAttack('melee').averageDamage.toString(),
                           style: Get.textTheme.headlineLarge,
@@ -578,8 +582,10 @@ class Home extends GetView<MainCtrl> {
                           Dimensions.isSmallScreen ? 'Ranged' : 'Ranged attack',
                           style: Get.textTheme.labelMedium,
                         ),
-                        leading:
-                            const Icon(Icons.connect_without_contact_outlined),
+                        leading: Dimensions.isSmallScreen
+                            ? null
+                            : const Icon(
+                                Icons.connect_without_contact_outlined),
                         onTap: () => controller.rolls.roll(
                           stat: 'Ranged attack',
                           bonus: computeAttack('ranged').modifier,
@@ -605,8 +611,10 @@ class Home extends GetView<MainCtrl> {
                           'Ranged damage',
                           style: Get.textTheme.labelMedium,
                         ),
-                        leading:
-                            const Icon(Icons.connect_without_contact_outlined),
+                        leading: Dimensions.isSmallScreen
+                            ? null
+                            : const Icon(
+                                Icons.connect_without_contact_outlined),
                         trailing: Text(
                           computeAttack('ranged').averageDamage.toString(),
                           style: Get.textTheme.headlineLarge,

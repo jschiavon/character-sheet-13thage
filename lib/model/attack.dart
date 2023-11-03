@@ -22,9 +22,9 @@ class Attack {
   String printDamage() {
     String result =
         '${level}d$dice ${(multiplier * modifier).toSignedString()}';
-    if (miss != null) {
-      result += ' ($miss)';
-    }
+    // if (miss != null) {
+    //   result += ' ($miss)';
+    // }
     return result;
   }
 
