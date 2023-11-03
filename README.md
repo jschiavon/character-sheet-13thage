@@ -60,7 +60,7 @@ If you want to contribute (I don't know why, as this is mostly a pet project) yo
 
 This Android app is licensed under the [GNU General Public License, version 3](https://www.gnu.org/licenses/gpl-3.0.en.html).
 
-You are free to use, modify, and distribute this software in accordance with the terms and conditions specified in the GPL-3.0 license. For the full text of the license, please refer to the [COPYNG](COPYNG) file in this repository.
+You are free to use, modify, and distribute this software in accordance with the terms and conditions specified in the GPL-3.0 license. For the full text of the license, please refer to the [LICENSE](LICENSE) file in this repository.
 
 When using, modifying, or distributing this software, it's essential to understand and comply with the obligations and restrictions set forth by the GPL-3.0 license, such as sharing the source code if you distribute modified versions of the app.
 
