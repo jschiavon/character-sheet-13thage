@@ -37,5 +37,19 @@ class RollsCtrl extends GetxController {
     ));
   }
 
+  void rollDamage({
+    String stat = '',
+    int bonus = 0,
+    int level = 0,
+    int damageDie = 6,
+  }) {
+    rollsList.add(Roll.randomDamage(
+      stat: stat,
+      bonus: bonus,
+      level: level,
+      damageDie: damageDie,
+    ));
+  }
+
   int get count => rollsList.length;
 }

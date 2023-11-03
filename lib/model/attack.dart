@@ -28,6 +28,8 @@ class Attack {
     return result;
   }
 
+  int get damageModifier => multiplier * modifier;
+
   int get averageDamage {
     return (level * dice / 2).ceil() + multiplier * modifier;
   }

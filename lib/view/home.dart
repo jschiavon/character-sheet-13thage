@@ -544,6 +544,12 @@ class Home extends GetView<MainCtrl> {
                           computeAttack('melee').averageDamage.toString(),
                           style: Get.textTheme.headlineLarge,
                         ),
+                        onTap: () => controller.rolls.rollDamage(
+                          stat: 'Melee damage',
+                          damageDie: computeAttack('melee').dice,
+                          bonus: computeAttack('melee').damageModifier,
+                          level: controller.character.level,
+                        ),
                       ),
                     ),
                   ),
@@ -652,13 +658,10 @@ class Home extends GetView<MainCtrl> {
 
   Widget createRollTile(Roll? roll) {
     if (roll != null) {
-      final bonus = roll.bonus + (roll.proficency ?? false ? 4 : 0);
-      final totalRoll = roll.roll + bonus + roll.level;
-      return Card(
-        elevation: 3,
-        color: Get.theme.colorScheme.background,
-        surfaceTintColor: Get.theme.colorScheme.background,
-        child: ListTile(
+      if (roll.damageDie == null) {
+        final bonus = roll.bonus + (roll.proficency ?? false ? 4 : 0);
+        final totalRoll = roll.roll + bonus + roll.level;
+        return ListTile(
           leading: CircleAvatar(
             backgroundColor: Get.theme.colorScheme.primary,
             foregroundColor: Get.theme.colorScheme.onPrimary,
@@ -667,12 +670,26 @@ class Home extends GetView<MainCtrl> {
           title: Text(roll.ability ?? roll.stat ?? ''),
           subtitle: Text(
             'Natural roll: ${roll.roll}'
-            '  Bonus: ${bonus}'
+            '  Bonus: $bonus'
             '${roll.proficency ?? false ? ' (Prof)' : ''}'
             '${roll.level > 0 ? "  Level: ${roll.level}" : ""}',
           ),
-        ),
-      );
+        );
+      } else {
+        final totalRoll = roll.roll + roll.bonus;
+        return ListTile(
+          leading: CircleAvatar(
+            backgroundColor: Get.theme.colorScheme.primary,
+            foregroundColor: Get.theme.colorScheme.onPrimary,
+            child: Text(totalRoll.toString()),
+          ),
+          title: Text(roll.ability ?? roll.stat ?? ''),
+          subtitle: Text(
+            'Natural roll: ${roll.roll}'
+            '  Bonus: ${roll.bonus}',
+          ),
+        );
+      }
     }
     return Container();
   }

@@ -22,6 +22,7 @@ class Roll {
   int level;
   String? ability;
   String? stat;
+  int? damageDie;
   bool? proficency;
 
   Roll({
@@ -30,6 +31,7 @@ class Roll {
     this.level = 0,
     this.ability,
     this.stat,
+    this.damageDie,
     this.proficency,
   }) {
     if ((ability == null || ability!.isEmpty) &&
@@ -52,4 +54,13 @@ class Roll {
     this.stat,
     this.proficency,
   }) : roll = Random().nextInt(20) + 1;
+
+  Roll.randomDamage({
+    this.stat = '',
+    this.bonus = 0,
+    this.level = 0,
+    this.damageDie = 6,
+  }) : roll = List.generate(
+                level, (index) => Random().nextInt(damageDie ?? 6) + 1)
+            .reduce((value, element) => value + element);
 }

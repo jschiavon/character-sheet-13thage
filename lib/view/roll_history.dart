@@ -47,32 +47,37 @@ class RollHistoryView extends GetView<MainCtrl> {
   }
 
   Widget createRollTile(Roll roll) {
-    final bonus = roll.bonus + (roll.proficency ?? false ? 4 : 0);
-    final totalRoll = roll.roll + bonus + roll.level;
-    return ListTile(
-      leading: CircleAvatar(
-        backgroundColor: Get.theme.colorScheme.primary,
-        foregroundColor: Get.theme.colorScheme.onPrimary,
-        child: Text(totalRoll.toString()),
-      ),
-      title: Text(roll.ability ?? roll.stat ?? ''),
-      subtitle: Text(
-        'Natural roll: ${roll.roll}'
-        '  Bonus: ${bonus}'
-        '${roll.proficency ?? false ? ' (Prof)' : ''}'
-        '${roll.level > 0 ? "  Level: ${roll.level}" : ""}',
-      ),
-    );
-    // final totalRoll = roll.roll + roll.bonus + roll.level;
-    // return ListTile(
-    //   leading: CircleAvatar(
-    //     backgroundColor: Get.theme.colorScheme.primary,
-    //     foregroundColor: Get.theme.colorScheme.onPrimary,
-    //     child: Text(totalRoll.toString()),
-    //   ),
-    //   title: Text(roll.ability ?? roll.stat ?? ''),
-    //   subtitle: Text(
-    //       'Natural roll: ${roll.roll}   Bonus: ${roll.bonus.toSignedString()}${roll.level > 0 ? "   Level: ${roll.level}" : ""}'),
-    // );
+    if (roll.damageDie == null) {
+      final bonus = roll.bonus + (roll.proficency ?? false ? 4 : 0);
+      final totalRoll = roll.roll + bonus + roll.level;
+      return ListTile(
+        leading: CircleAvatar(
+          backgroundColor: Get.theme.colorScheme.primary,
+          foregroundColor: Get.theme.colorScheme.onPrimary,
+          child: Text(totalRoll.toString()),
+        ),
+        title: Text(roll.ability ?? roll.stat ?? ''),
+        subtitle: Text(
+          'Natural roll: ${roll.roll}'
+          '  Bonus: $bonus'
+          '${roll.proficency ?? false ? ' (Prof)' : ''}'
+          '${roll.level > 0 ? "  Level: ${roll.level}" : ""}',
+        ),
+      );
+    } else {
+      final totalRoll = roll.roll + roll.bonus;
+      return ListTile(
+        leading: CircleAvatar(
+          backgroundColor: Get.theme.colorScheme.primary,
+          foregroundColor: Get.theme.colorScheme.onPrimary,
+          child: Text(totalRoll.toString()),
+        ),
+        title: Text(roll.ability ?? roll.stat ?? ''),
+        subtitle: Text(
+          'Natural roll: ${roll.roll}'
+          '  Bonus: ${roll.bonus}',
+        ),
+      );
+    }
   }
 }
