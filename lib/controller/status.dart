@@ -68,4 +68,11 @@ class StatusCtrl extends GetxController {
         down: !statusModel.value.down,
         dead: statusModel.value.dead,
       );
+
+  void longRest() {
+    damage = 0;
+    recoveries = 0;
+    if (staggered) toggleStaggered();
+    if (down) toggleDown();
+  }
 }

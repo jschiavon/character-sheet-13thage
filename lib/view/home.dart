@@ -321,27 +321,41 @@ class Home extends GetView<MainCtrl> {
             style: Get.textTheme.titleLarge,
           ),
           children: [
+            TextButton(
+              onPressed: controller.status.longRest,
+              child: const Text("Long rest"),
+            ),
             Obx(
               () => Card(
-                elevation: 3,
+                elevation: controller.status.down ? 0 : 3,
                 color: controller.status.down
                     ? Get.theme.colorScheme.errorContainer
-                    : Get.theme.colorScheme.background,
+                    : null,
                 surfaceTintColor: Get.theme.colorScheme.background,
                 child: ListTile(
                   title: Text(
                     computeHP(),
-                    style: Get.textTheme.headlineLarge,
+                    style: Get.textTheme.headlineLarge!.copyWith(
+                      color: controller.status.down
+                          ? Get.theme.colorScheme.error
+                          : null,
+                    ),
                   ),
                   subtitle: Text(
                     'Hit Point',
                     style: Get.textTheme.labelMedium,
                   ),
-                  leading: Icon(
-                    Icons.favorite_outline,
-                    color: controller.status.down
-                        ? Get.theme.colorScheme.error
-                        : null,
+                  leading: Obx(
+                    () => Icon(
+                      controller.status.down
+                          ? Icons.favorite_border
+                          : controller.status.staggered
+                              ? Icons.heart_broken
+                              : Icons.favorite,
+                      color: controller.status.down
+                          ? Get.theme.colorScheme.error
+                          : null,
+                    ),
                   ),
                   trailing: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -350,7 +364,7 @@ class Home extends GetView<MainCtrl> {
                         // padding: const EdgeInsets.all(0),
                         visualDensity: VisualDensity.compact,
                         icon: Icon(
-                          Icons.favorite,
+                          Icons.emergency,
                           color: controller.status.down
                               ? Get.theme.colorScheme.error
                               : null,
@@ -728,7 +742,11 @@ class Home extends GetView<MainCtrl> {
   String computeHP() {
     int hp = (classDict!['hp'] + controller.abilities.constitution.modifier) *
         controller.character.hitPointMultiplier;
-
+    if (controller.status.damage >= hp ~/ 2) {
+      if (!controller.status.staggered) {
+        controller.status.toggleStaggered();
+      }
+    }
     if (controller.status.damage >= hp) {
       controller.status.damage = hp;
       if (!controller.status.down) {
