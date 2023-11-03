@@ -64,6 +64,7 @@ class MainCtrl extends GetxController {
       aspects.aspectsModel.value = Aspects(
         origin: 'Raised by the wolves',
         concept: 'Dirty mercenary',
+        weakness: 'Uncivilized',
         uniqueThing: 'Heigthened sense of smell',
         bond: 'The pack',
       );

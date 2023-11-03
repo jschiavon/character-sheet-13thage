@@ -19,6 +19,7 @@ class Aspects {
   final String concept;
   final String origin;
   final String bond;
+  final String weakness;
   final String uniqueThing;
 
   Aspects({
@@ -26,6 +27,7 @@ class Aspects {
     this.concept = '',
     this.origin = '',
     this.bond = '',
+    this.weakness = '',
     this.uniqueThing = '',
   });
 
@@ -35,6 +37,7 @@ class Aspects {
         concept: aspectsMap?['concept'] ?? '',
         origin: aspectsMap?['origin'] ?? '',
         bond: aspectsMap?['bond'] ?? '',
+        weakness: aspectsMap?['weakness'] ?? '',
         uniqueThing: aspectsMap?['uniqueThing'] ?? '');
   }
 
@@ -44,6 +47,7 @@ class Aspects {
       'concept': concept,
       'origin': origin,
       'bond': bond,
+      'weakness': weakness,
       'uniqueThing': uniqueThing,
     };
   }

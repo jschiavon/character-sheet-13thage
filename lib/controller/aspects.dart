@@ -29,6 +29,7 @@ class AspectsCtrl extends GetxController {
           concept: value,
           origin: aspectsModel.value.origin,
           bond: aspectsModel.value.bond,
+          weakness: aspectsModel.value.weakness,
           uniqueThing: aspectsModel.value.uniqueThing,
         );
       case 'origin':
@@ -37,6 +38,7 @@ class AspectsCtrl extends GetxController {
           concept: aspectsModel.value.concept,
           origin: value,
           bond: aspectsModel.value.bond,
+          weakness: aspectsModel.value.weakness,
           uniqueThing: aspectsModel.value.uniqueThing,
         );
       case 'bond':
@@ -45,6 +47,16 @@ class AspectsCtrl extends GetxController {
           concept: aspectsModel.value.concept,
           origin: aspectsModel.value.origin,
           bond: value,
+          weakness: aspectsModel.value.weakness,
+          uniqueThing: aspectsModel.value.uniqueThing,
+        );
+      case 'weakness':
+        aspectsModel.value = Aspects(
+          id: aspectsModel.value.id,
+          concept: aspectsModel.value.concept,
+          origin: aspectsModel.value.origin,
+          bond: aspectsModel.value.bond,
+          weakness: value,
           uniqueThing: aspectsModel.value.uniqueThing,
         );
       case 'uniqueThing':
@@ -55,6 +67,7 @@ class AspectsCtrl extends GetxController {
           concept: aspectsModel.value.concept,
           origin: aspectsModel.value.origin,
           bond: aspectsModel.value.bond,
+          weakness: aspectsModel.value.weakness,
           uniqueThing: value,
         );
       default:

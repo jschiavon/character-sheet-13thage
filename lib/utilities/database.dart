@@ -48,6 +48,7 @@ class DataBaseHelper {
   static const _origin = 'origin';
   static const _uniqueThing = 'uniqueThing';
   static const _bond = 'bond';
+  static const _weakness = 'weakness';
 
   late Database _db;
 
@@ -78,7 +79,8 @@ class DataBaseHelper {
             $_concept TEXT NOT NULL,
             $_origin TEXT NOT NULL,
             $_uniqueThing TEXT NOT NULL,
-            $_bond TEXT NOT NULL
+            $_bond TEXT NOT NULL,
+            $_weakness TEXT NOT NULL
           )
           ''');
     await db.execute('''
@@ -175,6 +177,7 @@ class DataBaseHelper {
           _origin,
           _uniqueThing,
           _bond,
+          _weakness,
         ],
         where: '$_id = ?',
         whereArgs: [id]);

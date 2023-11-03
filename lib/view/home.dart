@@ -211,15 +211,15 @@ class Home extends GetView<MainCtrl> {
             ),
             Obx(
               () => createDataTile(
-                label: 'one unique thing'.capitalizeFirst!,
-                value: controller.aspects.aspect('uniqueThing'),
+                label: 'weakness'.capitalizeFirst!,
+                value: controller.aspects.aspect('weakness'),
                 edit: () async {
                   final result = await editField(
-                    'one unique thing'.capitalizeFirst!,
-                    controller.aspects.aspect('uniqueThing'),
+                    'weakness'.capitalizeFirst!,
+                    controller.aspects.aspect('weakness'),
                   );
                   if (result != null) {
-                    controller.aspects.setAspect('uniqueThing', result);
+                    controller.aspects.setAspect('weakness', result);
                     controller.saveAspects();
                   }
                 },
@@ -236,6 +236,22 @@ class Home extends GetView<MainCtrl> {
                   );
                   if (result != null) {
                     controller.aspects.setAspect('bond', result);
+                    controller.saveAspects();
+                  }
+                },
+              ),
+            ),
+            Obx(
+              () => createDataTile(
+                label: 'one unique thing'.capitalizeFirst!,
+                value: controller.aspects.aspect('uniqueThing'),
+                edit: () async {
+                  final result = await editField(
+                    'one unique thing'.capitalizeFirst!,
+                    controller.aspects.aspect('uniqueThing'),
+                  );
+                  if (result != null) {
+                    controller.aspects.setAspect('uniqueThing', result);
                     controller.saveAspects();
                   }
                 },
