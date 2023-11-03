@@ -648,7 +648,19 @@ class Home extends GetView<MainCtrl> {
                   ],
                 ),
               ),
-              createRollTile(controller.rolls.rollsList.lastOrNull)
+              createRollTile(controller.rolls.rollsList.lastOrNull),
+              if (controller.rolls.count > 1)
+                createRollTile(
+                  controller.rolls.rollsList
+                      .getRange(0, controller.rolls.count - 1)
+                      .lastOrNull,
+                ),
+              if (controller.rolls.count > 2)
+                createRollTile(
+                  controller.rolls.rollsList
+                      .getRange(0, controller.rolls.count - 2)
+                      .lastOrNull,
+                ),
             ],
           ),
         ),
