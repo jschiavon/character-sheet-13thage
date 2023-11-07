@@ -364,26 +364,49 @@ class Home extends GetView<MainCtrl> {
                           : null,
                     ),
                   ),
+                  onTap: () => Get.dialog(addDamage()),
+                ),
+              ),
+            ),
+            Obx(
+              () => Card(
+                elevation: 3,
+                color: Get.theme.colorScheme.background,
+                surfaceTintColor: Get.theme.colorScheme.background,
+                child: ListTile(
+                  leading: Icon(
+                    Icons.emergency,
+                    color: controller.status.down
+                        ? Get.theme.colorScheme.error
+                        : null,
+                  ),
+                  subtitle: Text(
+                    'Recoveries',
+                    style: Get.textTheme.labelMedium,
+                  ),
+                  title: Text(
+                    '${remainingRecoveries()} / ${classDict!['recoveries']}',
+                    style: Get.textTheme.headlineLarge!.copyWith(
+                      color: controller.status.down
+                          ? Get.theme.colorScheme.error
+                          : null,
+                    ),
+                  ),
                   trailing: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      IconButton(
-                        // padding: const EdgeInsets.all(0),
-                        visualDensity: VisualDensity.compact,
-                        icon: Icon(
-                          Icons.emergency,
-                          color: controller.status.down
-                              ? Get.theme.colorScheme.error
-                              : null,
-                        ),
-                        onPressed:
-                            remainingRecoveries() > 0 ? spendRecovery : null,
+                      Text(
+                        'Amount: ${recoveryAmount()['amount']}',
+                        style: Get.textTheme.labelSmall,
                       ),
                       Text(
-                          'Remaining ${remainingRecoveries()} / ${classDict!['recoveries']}')
+                        'Average: ${recoveryAmount()['average']}',
+                        style: Get.textTheme.labelSmall,
+                      ),
                     ],
                   ),
-                  onTap: () => Get.dialog(addDamage()),
+                  onTap: remainingRecoveries() > 0 ? spendRecovery : null,
                 ),
               ),
             ),
@@ -976,7 +999,7 @@ class Home extends GetView<MainCtrl> {
 
     return AlertDialog(
       scrollable: true,
-      title: Text("Damage / Healing"),
+      title: const Text("Damage / Healing"),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -1101,6 +1124,18 @@ class Home extends GetView<MainCtrl> {
             child: const Text('Confirm'))
       ],
     );
+  }
+
+  Map<String, String> recoveryAmount() {
+    int quantity = controller.character.level;
+    int dice = classDict!['recovery dice'];
+    int mod = controller.abilities.constitution.modifier *
+        controller.character.abilityMultiplier;
+    int average = quantity * (dice ~/ 2 + 1) + mod;
+    return {
+      'amount': '${quantity}d$dice + $mod',
+      'average': average.toString(),
+    };
   }
 
   void spendRecovery({int number = 1, bool average = true}) {
