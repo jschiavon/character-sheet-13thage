@@ -972,49 +972,124 @@ class Home extends GetView<MainCtrl> {
 
   Widget addDamage() {
     final damage = 0.obs;
+    final color = Get.theme.colorScheme.onBackground.obs;
+
     return AlertDialog(
       scrollable: true,
-      title: const Text("Add damage"),
-      content: Card(
-        elevation: 3,
-        color: Get.theme.colorScheme.background,
-        surfaceTintColor: Get.theme.colorScheme.background,
-        child: ListTile(
-          isThreeLine: false,
-          title: Center(
-            child: Obx(
-              () => Text(
-                damage.value.toString(),
-                style: Get.textTheme.headlineSmall,
-                overflow: TextOverflow.fade,
-                softWrap: false,
+      title: Text("Damage / Healing"),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Card(
+            elevation: 3,
+            color: Get.theme.colorScheme.background,
+            surfaceTintColor: Get.theme.colorScheme.background,
+            child: ListTile(
+              isThreeLine: false,
+              title: Center(
+                child: Obx(
+                  () => Text(
+                    damage.value.toString(),
+                    style: Get.textTheme.headlineMedium!
+                        .copyWith(color: color.value),
+                    overflow: TextOverflow.fade,
+                    softWrap: false,
+                  ),
+                ),
               ),
+              subtitle: Obx(
+                () => Text(damage.value > 0
+                    ? "Damage"
+                    : damage.value < 0
+                        ? "Healing"
+                        : ''),
+              ),
+              // trailing: Column(
+              //   mainAxisSize: MainAxisSize.min,
+              //   children: [
+              //     GestureDetector(
+              //       onTap: () => damage.value += 1,
+              //       child: Icon(
+              //         Icons.expand_less,
+              //         size: Get.textTheme.titleLarge!.fontSize,
+              //       ),
+              //     ),
+              //     GestureDetector(
+              //       onTap: () => damage.value -= 1,
+              //       child: Icon(
+              //         Icons.expand_more,
+              //         size: Get.textTheme.titleLarge!.fontSize,
+              //       ),
+              //     ),
+              //   ],
+              // ),
             ),
           ),
-          subtitle: Text(
-            'Damage',
-            style: Get.textTheme.labelSmall,
-          ),
-          trailing: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              GestureDetector(
-                onTap: () => damage.value += 1,
-                child: Icon(
-                  Icons.expand_less,
-                  size: Get.textTheme.titleLarge!.fontSize,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              // mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Ink(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Get.isDarkMode ? Colors.greenAccent : Colors.green,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Get.theme.colorScheme.shadow.withOpacity(0.7),
+                        blurRadius: 3,
+                        offset: const Offset(0, 2),
+                      )
+                    ],
+                  ),
+                  width: 80,
+                  child: IconButton(
+                    onPressed: () {
+                      damage.value -= 1;
+                      if (damage.value < 0) {
+                        color.value =
+                            Get.isDarkMode ? Colors.greenAccent : Colors.green;
+                      }
+                      if (damage.value == 0) {
+                        color.value = Get.theme.colorScheme.onBackground;
+                      }
+                    },
+                    icon: const Icon(Icons.remove),
+                    color: Get.theme.colorScheme.onSecondary,
+                  ),
                 ),
-              ),
-              GestureDetector(
-                onTap: () => damage.value -= 1,
-                child: Icon(
-                  Icons.expand_more,
-                  size: Get.textTheme.titleLarge!.fontSize,
+                Ink(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Get.theme.colorScheme.error,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Get.theme.colorScheme.shadow.withOpacity(0.7),
+                        blurRadius: 3,
+                        offset: const Offset(0, 2),
+                      )
+                    ],
+                  ),
+                  width: 80,
+                  child: IconButton(
+                    onPressed: () {
+                      damage.value += 1;
+                      if (damage.value > 0) {
+                        color.value = Get.theme.colorScheme.error;
+                      }
+                      if (damage.value == 0) {
+                        color.value = Get.theme.colorScheme.onBackground;
+                      }
+                    },
+                    icon: const Icon(Icons.add),
+                    color: Get.theme.colorScheme.onError,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
+        ],
       ),
       actions: [
         TextButton(
